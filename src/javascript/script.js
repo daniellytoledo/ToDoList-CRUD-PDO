@@ -14,4 +14,25 @@ $(document).ready(function () {
             $(this).removeClass('done');
         }
     });
+
+    $('.progress').on('change', function() {
+        const id = $(this).data('task-id');
+        const completed = $(this).is(':checked') ? 'true' : 'false';
+        $.ajax({
+            url: '../../actions/update_progress.php',
+            method: 'POST',
+            data: {id: id, completed: completed},
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+
+                } else {
+                    alert('Not able to write the task!');
+                }
+            },
+            error: function () {
+                alert('Something is wrong...');
+            }
+        });
+    })
 });
