@@ -3,10 +3,16 @@ require_once('database/conn.php');
 
 $tasks = [];
 
-$sql = $pdo ->query("SELECT * FROM task");
-
-if ($sql ->rowCount() > 0) {
-    $tasks = $sql ->fetchAll(PDO::FETCH_ASSOC);
+if (isset($pdo)) {
+    try {
+        $sql = $pdo->query("SELECT * FROM task");
+        
+        if ($sql->rowCount() > 0) {
+            $tasks = $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+    } catch (PDOException $e) {
+        echo "Erro ao buscar tarefas: " . $e->getMessage();
+    }
 }
 
 ?><!DOCTYPE html>
