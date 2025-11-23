@@ -5,7 +5,7 @@ $tasks = [];
 
 if (isset($pdo)) {
     try {
-        $sql = $pdo->query("SELECT * FROM task");
+        $sql = $pdo->query("SELECT * FROM task ORDER BY id ASC");
         
         if ($sql->rowCount() > 0) {
             $tasks = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -62,8 +62,20 @@ if (isset($pdo)) {
                     </a>
                 </div>
 
-                <form action="" class="to-do-form edit-task hidden">
-                    <input type="text" name="description" placeholder="Edit your task here">
+                <form action="actions/update.php" method="POST" class="to-do-form edit-task hidden">
+                    <input 
+                        type="text"
+                        class="hidden"
+                        name="id"
+                        value="<?= $task['id']?>"
+                    >
+                    <input 
+                        type="text"
+                        name="description"
+                        placeholder="Edit your task here"
+                        value="<?= $task['description']?>"
+                    >
+
                     <button type="submit" class="form-button confirm-button">
                         <i class="fa-solid fa-check"></i>
                     </button>
