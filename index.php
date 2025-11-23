@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<?php
+require_once('database/conn.php');
+
+$tasks = [];
+
+$sql = $pdo ->query("SELECT * FROM task");
+
+if ($sql ->rowCount() > 0) {
+    $tasks = $sql ->fetchAll(PDO::FETCH_ASSOC);
+}
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,8 +32,14 @@
         </form>
 
         <div id="tasks">
+            <?php foreach($tasks as $task): ?>
             <div class="task">
-                <input type="checkbox" name="progress" class="progress">
+
+                <input
+                type="checkbox"
+                name="progress"
+                class="progress"
+                >
 
                 <p class="task-description">
                     Bolo de Casamento - Maria
@@ -45,6 +62,7 @@
                     </button>
                 </form>
             </div>
+            <?php endforeach ?>
         </div>
     </div>
     
