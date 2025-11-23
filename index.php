@@ -30,7 +30,7 @@ if (isset($pdo)) {
     <div id="to_do">
         <h1>THINGS TO DO</h1>
 
-        <form action="" class="to-do-form">
+        <form action="actions/create.php" method="post" class="to-do-form">
             <input type="text" name="description" placeholder="write your task here" required>
             <button type="submit" class="form-button">
                 <i class="fa-solid fa-plus"></i>
@@ -42,13 +42,14 @@ if (isset($pdo)) {
             <div class="task">
 
                 <input
-                type="checkbox"
-                name="progress"
-                class="progress"
+                    type="checkbox"
+                    name="progress"
+                    class="progress"
+                    <?= $task['completed'] ? 'checked' : '' ?>
                 >
 
                 <p class="task-description">
-                    Bolo de Casamento - Maria
+                    <?= $task['description'] ?>
                 </p>
                 
                 <div class="task-actions">
